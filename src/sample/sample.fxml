@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="767.0" prefWidth="908.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Group fx:id="greetBaseImage">
+         <children>
+            <ImageView fitHeight="768.0" fitWidth="910.0">
+               <image>
+                  <Image url="@tropicalBackground.jpeg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="768.0" fitWidth="907.0" layoutX="16.0" layoutY="-3.0">
+               <image>
+                  <Image url="@imageGreet.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="playbutton" fitHeight="188.0" fitWidth="200.0" layoutX="353.0" layoutY="555.0" onMouseClicked="#playGame">
+               <image>
+                  <Image url="@playbutton.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>
