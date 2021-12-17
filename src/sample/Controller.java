@@ -9,13 +9,20 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-public class Controller {
+public class Controller extends Main {
+
+    @FXML
+    private AnchorPane greetAnchor; //greeting Page
+
+    @FXML
+    private AnchorPane MainBoardAnchor; //main snakes and ladder game
 
     @FXML
     private Group greetBaseImage;
@@ -30,6 +37,7 @@ public class Controller {
     void playGame(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("snakesandladder.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("Main board Game");
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -59,14 +67,9 @@ public class Controller {
     }
 
     @FXML
-    void return_Home(MouseEvent event) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+    void return_Home(MouseEvent event) throws Exception {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("Snakes and Ladder");
-        stage.setScene(new Scene(root));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        start(stage);
     }
 
 
