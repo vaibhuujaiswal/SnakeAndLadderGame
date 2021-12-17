@@ -5,26 +5,26 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="greetAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="767.0" prefWidth="908.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="greetAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Group fx:id="greetBaseImage">
          <children>
-            <ImageView fitHeight="768.0" fitWidth="910.0">
+            <ImageView fitHeight="674.0" fitWidth="493.0">
                <image>
                   <Image url="@tropicalBackground.jpeg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="768.0" fitWidth="907.0" layoutX="16.0" layoutY="-3.0">
+            <ImageView fitHeight="490.0" fitWidth="495.0" layoutX="-1.0" layoutY="41.0">
                <image>
                   <Image url="@imageGreet.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="play" fitHeight="188.0" fitWidth="200.0" layoutX="367.0" layoutY="497.0" onMouseClicked="#playGame">
+            <ImageView fx:id="play" fitHeight="188.0" fitWidth="200.0" layoutX="163.0" layoutY="461.0" onMouseClicked="#playGame">
                <image>
                   <Image url="@playbutton.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="exitbutton" fitHeight="60.0" fitWidth="60.0" layoutX="826.0" layoutY="23.0" onMouseClicked="#exit_key">
+            <ImageView fx:id="exitbutton" fitHeight="50.0" fitWidth="48.0" layoutX="428.0" layoutY="11.0" onMouseClicked="#exit_key">
                <image>
                   <Image url="@cross_mark.png" />
                </image>
