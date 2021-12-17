@@ -24,6 +24,9 @@ public class Controller {
     private ImageView play;
 
     @FXML
+    private ImageView returnLogo;
+
+    @FXML
     void playGame(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("snakesandladder.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -46,13 +49,26 @@ public class Controller {
 
     Random random = new Random();
 
+
     @FXML
     void Roll_Dice(MouseEvent event) {
-        //dice_image.setDisable(true);
         int rand = (int)(Math.random()*6+1);
         File file = new File("src/sample/dice/dice" + (rand) + ".png");
         dice_image.setImage(new Image(file.toURI().toString()));
 
     }
+
+    @FXML
+    void return_Home(MouseEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("Snakes and Ladder");
+        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
 }
 

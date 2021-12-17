@@ -45,17 +45,17 @@
             <Image url="@tropicalBackground.jpeg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="804.0" fitWidth="382.0" layoutX="61.0" layoutY="-96.0">
+      <ImageView fitHeight="862.0" fitWidth="433.0" layoutX="31.0" layoutY="-122.0">
          <image>
             <Image url="@board.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="player1" fitHeight="54.0" fitWidth="33.0" layoutX="65.0" layoutY="482.0">
+      <ImageView fx:id="player1" fitHeight="54.0" fitWidth="33.0" layoutX="44.0" layoutY="505.0">
          <image>
             <Image url="@player1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="player2" fitHeight="45.0" fitWidth="32.0" layoutX="97.0" layoutY="488.0">
+      <ImageView fx:id="player2" fitHeight="47.0" fitWidth="31.0" layoutX="76.0" layoutY="507.0">
          <image>
             <Image url="@player2.png" />
          </image>
@@ -68,6 +68,16 @@
       <ImageView fx:id="dice_image" fitHeight="50.0" fitWidth="54.0" layoutX="223.0" layoutY="548.0" onMouseClicked="#Roll_Dice">
          <image>
             <Image url="@dice/dice6.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="returnLogo" onMouseClicked="#return_Home">
+         <image>
+            <Image url="@Screenshot_2021-12-17_at_11.17.26_PM-removebg-preview%20(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="restartGame" fitHeight="39.0" fitWidth="37.0" layoutX="10.0" layoutY="56.0" onMouseClicked="#playGame">
+         <image>
+            <Image url="@restart.png" />
          </image>
       </ImageView>
    </children>
