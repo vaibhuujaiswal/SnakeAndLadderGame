@@ -48,29 +48,10 @@ public class Controller {
 
     @FXML
     void Roll_Dice(MouseEvent event) {
-        ImageView dice_img = new ImageView();
-        dice_img.setDisable(true);
-
-        Thread thr = new Thread() {
-            public void roll() {
-                int side = 6;
-                int i = 0;
-                System.out.println("Runnning");
-                try {
-                    while (i != 15) {
-                        File file = new File("src/sample/dice/dice" + (random.nextInt(side) + 1) + ".png");
-                        dice_img.setImage(new Image(file.toURI().toString()));
-                        Thread.sleep(50);
-                        i++;
-                    }
-                    dice_img.setDisable(false);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thr.start();
+        //dice_image.setDisable(true);
+        int rand = (int)(Math.random()*6+1);
+        File file = new File("src/sample/dice/dice" + (rand) + ".png");
+        dice_image.setImage(new Image(file.toURI().toString()));
 
     }
 }
