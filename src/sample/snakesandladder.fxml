@@ -55,17 +55,17 @@
             <Image url="@player1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="player2" fitHeight="47.0" fitWidth="31.0" layoutX="76.0" layoutY="507.0">
+      <ImageView fx:id="player2" fitHeight="47.0" fitWidth="31.0" layoutX="77.0" layoutY="510.0">
          <image>
             <Image url="@player2.png" />
          </image>
       </ImageView>
       <ImageView fx:id="identificationArea" fitHeight="87.0" fitWidth="304.0" layoutX="111.0" layoutY="533.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@player1identity.png" />
+            <Image url="@playerDull1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="dice_image" fitHeight="50.0" fitWidth="54.0" layoutX="223.0" layoutY="548.0" onMouseClicked="#Roll_Dice">
+      <ImageView fx:id="dice_image" fitHeight="54.0" fitWidth="57.0" layoutX="221.0" layoutY="545.0" onMouseClicked="#Roll_Dice">
          <image>
             <Image url="@dice/dice6.png" />
          </image>

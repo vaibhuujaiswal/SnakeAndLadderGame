@@ -60,14 +60,22 @@ public class Controller extends Main {
     private ImageView exitbutton; //red cross mark in main page
 
     Random random = new Random();
-
+    boolean playerbool = true;
+    int playerID = 1;
 
     @FXML
     void Roll_Dice(MouseEvent event) {
+        if (playerbool == true){
+            playerID = 1;
+        }else{
+            playerID = 2;
+        }
         int rand = (int)(Math.random()*6+1);
         File file = new File("src/sample/dice/dice" + (rand) + ".png");
         dice_image.setImage(new Image(file.toURI().toString()));
-
+        File pageChange = new File("src/sample/playerDull" + (playerID) + ".png");
+        playerbool = !playerbool;
+        identificationArea.setImage(new Image(pageChange.toURI().toString()));
     }
 
     @FXML
