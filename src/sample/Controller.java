@@ -1,28 +1,77 @@
 package sample;
 
-import com.sun.javafx.stage.EmbeddedWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
-import javax.swing.text.html.ImageView;
-import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class Controller {
+
     @FXML
-    private ImageView playbutton;
+    private Group greetBaseImage;
+
+    @FXML
+    private ImageView play;
 
     @FXML
     void playGame(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = FXMLLoader.load(getClass().getResource("snakesandladder.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        scene.set("Snakes and Ladder");
-        EmbeddedWindow primaryStage;
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("snakesandladder.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
-    
+
+    @FXML
+    private ImageView dice_image;
+
+    @FXML
+    private ImageView identificationArea;
+
+    @FXML
+    private ImageView player1;
+
+    @FXML
+    private ImageView player2;
+
+    Random random = new Random();
+
+    @FXML
+    void Roll_Dice(MouseEvent event) {
+        ImageView dice_img = new ImageView();
+        dice_img.setDisable(true);
+
+        Thread thr = new Thread() {
+            public void roll() {
+                int side = 6;
+                int i = 0;
+                System.out.println("Runnning");
+                try {
+                    while (i != 15) {
+                        File file = new File("src/sample/dice/dice" + (random.nextInt(side) + 1) + ".png");
+                        dice_img.setImage(new Image(file.toURI().toString()));
+                        Thread.sleep(50);
+                        i++;
+                    }
+                    dice_img.setDisable(false);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thr.start();
+
     }
 }
+

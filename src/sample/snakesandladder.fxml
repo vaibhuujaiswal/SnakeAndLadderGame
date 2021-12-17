@@ -37,34 +37,38 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Group AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <ImageView fitHeight="630.0" fitWidth="743.0" layoutX="1.0" layoutY="-1.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-17.0" AnchorPane.topAnchor="-1.0">
+      <ImageView fitHeight="667.0" fitWidth="494.0" layoutY="-1.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@tropicalBackground.jpeg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="600.0" fitWidth="553.0" layoutX="170.0" layoutY="13.0">
+      <ImageView fitHeight="804.0" fitWidth="382.0" layoutX="61.0" layoutY="-96.0">
          <image>
-            <Image url="@board.jpeg" />
+            <Image url="@board.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="37.0" fitWidth="33.0" layoutX="154.0" layoutY="566.0">
-         <image>
-            <Image url="@arrowImage.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="player1" fitHeight="65.0" fitWidth="54.0" layoutX="116.0" layoutY="542.0">
+      <ImageView fx:id="player1" fitHeight="54.0" fitWidth="33.0" layoutX="65.0" layoutY="482.0">
          <image>
             <Image url="@player1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="player2" fitHeight="64.0" fitWidth="64.0" layoutX="109.0" layoutY="573.0">
+      <ImageView fx:id="player2" fitHeight="45.0" fitWidth="32.0" layoutX="97.0" layoutY="488.0">
          <image>
             <Image url="@player2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="diceImage" fitHeight="102.0" fitWidth="111.0" layoutX="33.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="identificationArea" fitHeight="87.0" fitWidth="304.0" layoutX="111.0" layoutY="533.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@player1identity.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="dice_image" fitHeight="50.0" fitWidth="54.0" layoutX="223.0" layoutY="548.0" onMouseClicked="#Roll_Dice">
+         <image>
+            <Image url="@dice/dice6.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
