@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -55,6 +56,9 @@ public class Controller extends Main {
     @FXML
     private ImageView player2;
 
+    @FXML
+    private ImageView exitbutton; //red cross mark in main page
+
     Random random = new Random();
 
 
@@ -71,6 +75,13 @@ public class Controller extends Main {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         start(stage);
     }
+
+    @FXML
+    void exit_key(MouseEvent event) {
+        Stage stage = (Stage) exitbutton.getScene().getWindow();
+        stage.close();
+    }
+
 
 
 }

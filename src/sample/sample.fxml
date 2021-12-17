@@ -24,6 +24,11 @@
                   <Image url="@playbutton.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="exitbutton" fitHeight="60.0" fitWidth="60.0" layoutX="826.0" layoutY="23.0" onMouseClicked="#exit_key">
+               <image>
+                  <Image url="@cross_mark.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
    </children>
