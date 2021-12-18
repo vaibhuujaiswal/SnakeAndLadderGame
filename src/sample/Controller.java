@@ -98,7 +98,7 @@ public class Controller extends Main {
         return translate;
     }
 
-
+    int t = 0;
 
     @FXML
     void Roll_Dice(MouseEvent event) {
@@ -107,7 +107,7 @@ public class Controller extends Main {
         if (playerbool == true){
             playerID = 1;
         }else{
-            playerID = 2;
+            playerID = 2; //done
         }
         if(flag3000 == false) {
             movement = translationFunction(300, arrow, 0, -10, 0, -1, true);
