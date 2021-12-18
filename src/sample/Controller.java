@@ -24,7 +24,7 @@ import java.util.Random;
 
 import static javafx.animation.Animation.INDEFINITE;
 
-//transition of arrow
+//transition of arrow DONE
 //ask senior about how the rubric is for this project (probably the TA or some other TA)
 //connect dice movmenent to the pieces
 //along with this think how to
@@ -90,24 +90,50 @@ public class Controller extends Main {
         }else{
             translate.setCycleCount(count);
         }
-        translate.setToX(x);
-        translate.setToY(y);
-        translate.setToX(z);
+        translate.setByX(x);
+        translate.setByY(y);
+        translate.setByX(z);
         translate.setAutoReverse(autoreturn);
 
         return translate;
     }
 
-    int t = 0;
+    boolean player1EntryThrow = false;
+    boolean player2EntryThrow = false;
+
+
+    void playerInformation(Node player,int playerID, int rand,boolean entryThrow,int currentX, int currentY, int currentZ){
+        if (entryThrow == false){
+            if (rand == 1){
+                if (playerID == 1){
+                    translationFunction(300,player,20,-60,0,1,false).play();
+                    player1EntryThrow = true;
+                }
+                else{
+                    translationFunction(300,player,-15,-60,0,1,false).play();
+                    player2EntryThrow = true;
+                }
+            }
+        }else{
+            translationFunction(300,player,40,0,0,1,false).play();
+        }
+    }
 
     @FXML
     void Roll_Dice(MouseEvent event) {
 
+        Node n;
+        boolean entryThrowRegister;
         //switching of player
         if (playerbool == true){
             playerID = 1;
+            n = player1;
+            entryThrowRegister = player1EntryThrow;
+
         }else{
             playerID = 2; //done
+            n = player2;
+            entryThrowRegister = player2EntryThrow;
         }
         if(flag3000 == false) {
             movement = translationFunction(300, arrow, 0, -10, 0, -1, true);
@@ -123,7 +149,9 @@ public class Controller extends Main {
         playerbool = !playerbool;
         identificationArea.setImage(new Image(pageChange.toURI().toString()));
 
-//        movement.stop();
+        playerInformation(n,playerID,rand,entryThrowRegister,0,0,0);
+
+
 
     }
     @FXML
