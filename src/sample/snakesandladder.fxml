@@ -65,7 +65,7 @@
             <Image url="@playerDull1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="dice_image" fitHeight="54.0" fitWidth="57.0" layoutX="221.0" layoutY="545.0" onMouseClicked="#Roll_Dice">
+      <ImageView fx:id="dice_image" fitHeight="54.0" fitWidth="57.0" layoutX="221.0" layoutY="545.0" onKeyPressed="#Roll_Dice" onMouseClicked="#Roll_Dice">
          <image>
             <Image url="@dice/dice6.png" />
          </image>
@@ -78,6 +78,11 @@
       <ImageView fx:id="restartGame" fitHeight="39.0" fitWidth="37.0" layoutX="10.0" layoutY="56.0" onMouseClicked="#playGame">
          <image>
             <Image url="@restart.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="arrow" fitHeight="37.0" fitWidth="35.0" layoutX="230.0" layoutY="508.0">
+         <image>
+            <Image url="@yellowarrow.png" />
          </image>
       </ImageView>
    </children>
