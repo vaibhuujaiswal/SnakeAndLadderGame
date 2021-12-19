@@ -96,6 +96,7 @@ public class Controller extends Main {
         }else{
             translate.setCycleCount(count);
         }
+        //translate.setFromX(object.getTranslateX());
         translate.setByX(x);
         translate.setByY(y);
         translate.setByZ(z);
@@ -110,35 +111,31 @@ public class Controller extends Main {
 
     void playerInformation(Node player,int playerID, int rand,int currentX, int currentY, int currentZ,int tileValue) {
             if (playerID == 1) {
-                if (tileValuePlayer1 % 10 == 0) { //in case the tile number is 10,20,30,40,50....60
+                if (tileValuePlayer1 % 10 == 0 && tileValuePlayer1>=10) { //in case the tile number is 10,20,30,40,50....60..90
                     System.out.println("in 10");
                     translationFunction(300, player, 0, -60, 0, 1, false).play();
-                    tileValuePlayer1 = tileValuePlayer1 + 1;
 
-                } else if ((tileValuePlayer1 % 10 )- 1 == 0) { //in case of tile number is 11,12,13,14,
-                    x = -x;
-                    System.out.println("in 11");
-                    translationFunction(300, player, x, 0, 0, 1, false).play();
-                    tileValuePlayer1 = tileValuePlayer1 + 1;
 
                 } else {
-                    System.out.println("in other");
+                    if ((tileValuePlayer1 % 10) - 1 == 0 && tileValuePlayer1 >= 10 ) { //in case of tile number is 11,21,31,41..91
+                        x = -x;
+                    }
                     translationFunction(300, player, x, 0, 0, 1, false).play();
-                    tileValuePlayer1 = tileValuePlayer1 + 1;
                 }
+                ++tileValuePlayer1;
 
             } else {
-                if (tileValuePlayer2 % 10 == 0) { //in case the tile number is 10,20,30,40,50....60
+                if (tileValuePlayer2 % 10 == 0 && tileValuePlayer2 >= 10) { //in case the tile number is 10,20,30,40,50....60
                     translationFunction(300, player, 0, -60, 0, 1, false).play();
-                    tileValuePlayer2 = tileValuePlayer2 + 1;
-                } else if ((tileValuePlayer2 - 1) % 10 == 0) { //in case of tile number is 11,12,13,14,
-                    x = -x;
-                    translationFunction(300, player, x, 0, 0, 1, false).play();
-                    tileValuePlayer2 = tileValuePlayer2 + 1;
+
                 } else {
+                    if ((tileValuePlayer2 - 1) % 10  == 0 && tileValuePlayer2 >= 10) { //in case of tile number is 11,12,13,14,
+                        x = -x;
+                    }
                     translationFunction(300, player, x, 0, 0, 1, false).play();
-                    tileValuePlayer2 = tileValuePlayer2 + 1;
+
                 }
+                ++tileValuePlayer2;
             }
         }
 
