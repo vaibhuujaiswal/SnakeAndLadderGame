@@ -81,6 +81,12 @@ public class Controller extends Main {
 
     private TranslateTransition movement;
     private boolean flag3000 = false;
+    boolean player1EntryThrow = false;
+    boolean player2EntryThrow = false;
+    int tileValuePlayer1 = 1;
+    int tileValuePlayer2 = 1;
+
+
 
     TranslateTransition translationFunction(double time, Node object, double x, double y, double z, int count, boolean autoreturn){
         TranslateTransition translate;
@@ -92,50 +98,73 @@ public class Controller extends Main {
         }
         translate.setByX(x);
         translate.setByY(y);
-        translate.setByX(z);
+        translate.setByZ(z);
         translate.setAutoReverse(autoreturn);
 
         return translate;
     }
 
-    boolean player1EntryThrow = false;
-    boolean player2EntryThrow = false;
+    int x = 38;
+    //problems with writing entry throw here, or maybe thats the solution of using it this way
+    //adding +1 to the tile not everytime a dice is thrown, but everytime the random value is added to the main file
 
+    void playerInformation(Node player,int playerID, int rand,int currentX, int currentY, int currentZ,int tileValue) {
+            if (playerID == 1) {
+                if (tileValuePlayer1 % 10 == 0) { //in case the tile number is 10,20,30,40,50....60
+                    System.out.println("in 10");
+                    translationFunction(300, player, 0, -60, 0, 1, false).play();
+                    tileValuePlayer1 = tileValuePlayer1 + 1;
 
-    void playerInformation(Node player,int playerID, int rand,boolean entryThrow,int currentX, int currentY, int currentZ){
-        if (entryThrow == false){
-            if (rand == 1){
-                if (playerID == 1){
-                    translationFunction(300,player,20,-60,0,1,false).play();
-                    player1EntryThrow = true;
+                } else if ((tileValuePlayer1 % 10 )- 1 == 0) { //in case of tile number is 11,12,13,14,
+                    x = -x;
+                    System.out.println("in 11");
+                    translationFunction(300, player, x, 0, 0, 1, false).play();
+                    tileValuePlayer1 = tileValuePlayer1 + 1;
+
+                } else {
+                    System.out.println("in other");
+                    translationFunction(300, player, x, 0, 0, 1, false).play();
+                    tileValuePlayer1 = tileValuePlayer1 + 1;
                 }
-                else{
-                    translationFunction(300,player,-15,-60,0,1,false).play();
-                    player2EntryThrow = true;
+
+            } else {
+                if (tileValuePlayer2 % 10 == 0) { //in case the tile number is 10,20,30,40,50....60
+                    translationFunction(300, player, 0, -60, 0, 1, false).play();
+                    tileValuePlayer2 = tileValuePlayer2 + 1;
+                } else if ((tileValuePlayer2 - 1) % 10 == 0) { //in case of tile number is 11,12,13,14,
+                    x = -x;
+                    translationFunction(300, player, x, 0, 0, 1, false).play();
+                    tileValuePlayer2 = tileValuePlayer2 + 1;
+                } else {
+                    translationFunction(300, player, x, 0, 0, 1, false).play();
+                    tileValuePlayer2 = tileValuePlayer2 + 1;
                 }
             }
-        }else{
-            translationFunction(300,player,40,0,0,1,false).play();
         }
-    }
+
+    //create a int that keeps a track of the positon of the dices in the gamei
 
     @FXML
     void Roll_Dice(MouseEvent event) {
 
         Node n;
         boolean entryThrowRegister;
+        int tileValue;
         //switching of player
-        if (playerbool == true){
+        if (playerbool){
             playerID = 1;
             n = player1;
             entryThrowRegister = player1EntryThrow;
+            tileValue = tileValuePlayer1;
+
 
         }else{
             playerID = 2; //done
             n = player2;
             entryThrowRegister = player2EntryThrow;
+            tileValue = tileValuePlayer2;
         }
-        if(flag3000 == false) {
+        if(!flag3000) {
             movement = translationFunction(300, arrow, 0, -10, 0, -1, true);
             movement.play();
             flag3000 = true;
@@ -149,8 +178,22 @@ public class Controller extends Main {
         playerbool = !playerbool;
         identificationArea.setImage(new Image(pageChange.toURI().toString()));
 
-        playerInformation(n,playerID,rand,entryThrowRegister,0,0,0);
-
+        if (!entryThrowRegister) {
+            if (rand == 1) {
+                if (playerID == 1) {
+                    translationFunction(300, n, 12, -60, 0, 1, false).play();
+                    player1EntryThrow = true;
+                } else {
+                    translationFunction(300, n, -15, -60, 0, 1, false).play();
+                    player2EntryThrow = true;
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < rand; i++) {
+                playerInformation(n, playerID, rand, 0, 0, 0, tileValue);
+            }
+        }
 
 
     }
