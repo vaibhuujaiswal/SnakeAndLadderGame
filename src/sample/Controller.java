@@ -98,6 +98,8 @@ public class Controller extends Main {
             object = player1;
         }else if(playerID == 2) {
             object = player2;
+        }else{
+            System.out.println("Error in player ID in transaltion function");
         }
         System.out.println(object);
 
