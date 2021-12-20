@@ -51,6 +51,7 @@ public class Controller extends Main {
 
     @FXML
     void playGame(MouseEvent event) throws IOException {
+        playerArray.clear();
         playerArray.add(new Player(player1,1,false,1,38,12,-60));
         playerArray.add(new Player(player2,2,false,1,38,-15,-60));
 
@@ -124,7 +125,7 @@ public class Controller extends Main {
         TranslateTransition t;
         if (playerArray.get(playerID - 1).getPlayerTileNumber() % 10 == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case the tile number is 10,20,30,40,50....60..90
             System.out.println("in 10 for player 1");
-            t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -50, 0, 1, false,playerID);
+            t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -45, 0, 1, false,playerID);
 
         }else {
             if (((playerArray.get(playerID - 1).getPlayerTileNumber() - 1) % 10) == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
