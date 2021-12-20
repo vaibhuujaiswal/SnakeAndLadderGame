@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("sample.fxml"));
         primaryStage.setTitle("Snakes and Ladder");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);

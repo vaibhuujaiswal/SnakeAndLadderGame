@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -20,8 +19,8 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static javafx.animation.Animation.INDEFINITE;
 
@@ -33,6 +32,8 @@ import static javafx.animation.Animation.INDEFINITE;
 public class Controller extends Main {
 
     public static ArrayList<Player> playerArray = new ArrayList<Player>();
+    public static HashMap<Integer,Snakes> snakesHashMap = new HashMap<Integer,Snakes>();
+    public static HashMap<Integer,Ladder> ladderHashMap = new HashMap<Integer,Ladder>();
 
     @FXML
     private AnchorPane greetAnchor; //greeting Page
@@ -51,10 +52,7 @@ public class Controller extends Main {
 
     @FXML
     void playGame(MouseEvent event) throws IOException {
-        playerArray.clear();
-        playerArray.add(new Player(player1,1,false,1,38,12,-60));
-        playerArray.add(new Player(player2,2,false,1,38,-15,-60));
-
+        initalize();
         System.out.println(playerArray.get(0).getPlayerID());
         System.out.println(playerArray.get(1).isPlayerEntrythrow());
         Parent root = FXMLLoader.load(getClass().getResource("snakesandladder.fxml"));
@@ -65,6 +63,13 @@ public class Controller extends Main {
         stage.show();
     }
 
+    void initalize(){
+        playerArray.clear();
+        playerArray.add(new Player(player1,1,false,1,38,12,-60));
+        playerArray.add(new Player(player2,2,false,1,38,-15,-60));
+        snakesHashMap.put(5,new Snakes(142,383,221,495,23,5));
+        ladderHashMap.put(2,new Ladder(100,488,67,384,21,2));
+    }
 
     @FXML
     private ImageView dice_image;
@@ -177,15 +182,27 @@ public class Controller extends Main {
                     playerArray.get(playerID - 1).setPlayerEntrythrow(true);
                 }
                 diceFinishedFlag = true;
+
             } else {
-                Timeline t = new Timeline(new KeyFrame(Duration.millis(350), e -> {
+                Timeline timeLine = new Timeline(new KeyFrame(Duration.millis(350), e -> {
                     playerInformation(playerID).play();
                 }));
-                t.setCycleCount(rand);
-                t.play();
+                timeLine.setCycleCount(rand);
+                timeLine.play();
 
-                t.setOnFinished(e -> diceFinishedFlag = true);
+                timeLine.setOnFinished(e -> diceFinishedFlag = true);
             }
+            //condition to check if title is snake;
+            if (snakesHashMap.containsKey(playerArray.get(playerID - 1).getPlayerTileNumber())){
+                translationFunction(300, playerArray.get(playerID - 1).getPlayern(),snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByX(),snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByY(), 0, 1, false, playerID).play();
+                playerArray.get(playerID-1).setPlayerTileNumber(playerArray.get(playerID-1).getPlayerTileNumber() + snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
+
+            }else if (ladderHashMap.containsKey(playerArray.get(playerID - 1).getPlayerTileNumber())){
+                translationFunction(300, playerArray.get(playerID - 1).getPlayern(),ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByX(),ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByY(), 0, 1, false, playerID).play();
+                playerArray.get(playerID-1).setPlayerTileNumber(playerArray.get(playerID-1).getPlayerTileNumber() + ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
+            }
+
+            //condition to check if title is saanp;
         }
     }
 
