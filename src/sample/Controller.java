@@ -1,7 +1,6 @@
 package sample;
 
-import javafx.animation.SequentialTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static javafx.animation.Animation.INDEFINITE;
 
@@ -96,13 +96,14 @@ public class Controller extends Main {
 
         if (playerID == 1){
             object = player1;
+//            System.out.println(playerArray.get(playerID - 1).getPlayerTileNumber());
         }else if(playerID == 2) {
             object = player2;
+//            System.out.println(playerArray.get(playerID - 1).getPlayerTileNumber());
         }else{
-            System.out.println("Error in player ID in transaltion function");
+            System.out.println("Error in player ID in Translation function");
         }
-        System.out.println(object);
-
+        System.out.println("For player ID" + playerID + "Image view of" + object);
         TranslateTransition translate;
         translate = new TranslateTransition(Duration.millis(time),object);
         if (count == -1){
@@ -121,19 +122,23 @@ public class Controller extends Main {
     //problems with writing entry throw here, or maybe thats the solution of using it this way
     //adding +1 to the tile not everytime a dice is thrown, but everytime the random value is added to the main file
 
-    void playerInformation(int playerID) {
+    TranslateTransition playerInformation(int playerID) {
+        TranslateTransition t;
         if (playerArray.get(playerID - 1).getPlayerTileNumber() % 10 == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case the tile number is 10,20,30,40,50....60..90
             System.out.println("in 10 for player 1");
-            translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -60, 0, 1, false,playerID).play();
-        } else {
-            if ((playerArray.get(playerID - 1).getPlayerTileNumber()) - 1 == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
+            t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -60, 0, 1, false,playerID);
+
+        }else {
+            if (((playerArray.get(playerID - 1).getPlayerTileNumber()) - 1 % 10) == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
                 System.out.println("in 11 for player 1");
+                System.out.println("");
                 playerArray.get(playerID - 1).setxAxis(-(playerArray.get(playerID - 1).getxAxis()));
             }
             System.out.println("In other values");
-            translationFunction(300, playerArray.get(playerID - 1).getPlayern(), playerArray.get(playerID - 1).getxAxis(), 0, 0, 1, false,playerID).play();
+            t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), playerArray.get(playerID - 1).getxAxis(), 0, 0, 1, false,playerID);
         }
         playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + 1);
+        return t;
     }
 
     @FXML
@@ -170,12 +175,12 @@ public class Controller extends Main {
                     playerArray.get(playerID-1).setPlayerEntrythrow(true);
             }
         }else {
-            for (int i = 0; i < rand; i++) {
-                playerInformation(playerID);
-            }
+            Timeline t = new Timeline(new KeyFrame(Duration.millis(350), e -> {
+                playerInformation(playerID).play();
+            }));
+            t.setCycleCount(rand);
+            t.play();
         }
-
-
     }
     @FXML
     void return_Home(MouseEvent event) throws Exception {
