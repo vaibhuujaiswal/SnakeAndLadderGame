@@ -96,14 +96,12 @@ public class Controller extends Main {
 
         if (playerID == 1){
             object = player1;
-//            System.out.println(playerArray.get(playerID - 1).getPlayerTileNumber());
         }else if(playerID == 2) {
             object = player2;
-//            System.out.println(playerArray.get(playerID - 1).getPlayerTileNumber());
         }else{
             System.out.println("Error in player ID in Translation function");
         }
-        System.out.println("For player ID" + playerID + "Image view of" + object);
+        //System.out.println("For player ID" + playerID + "Image view of" + object);
         TranslateTransition translate;
         translate = new TranslateTransition(Duration.millis(time),object);
         if (count == -1){
@@ -129,10 +127,11 @@ public class Controller extends Main {
             t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -50, 0, 1, false,playerID);
 
         }else {
-            if (((playerArray.get(playerID - 1).getPlayerTileNumber()) - 1 % 10) == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
+            if (((playerArray.get(playerID - 1).getPlayerTileNumber() - 1) % 10) == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
                 System.out.println("in 11 for player 1");
-                System.out.println("");
-                playerArray.get(playerID - 1).setxAxis(-(playerArray.get(playerID - 1).getxAxis()));
+                int tempValue = playerArray.get(playerID - 1).getxAxis();
+                tempValue = tempValue*-1;
+                playerArray.get(playerID - 1).setxAxis(tempValue);
             }
             System.out.println("In other values");
             t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), playerArray.get(playerID - 1).getxAxis(), 0, 0, 1, false,playerID);
