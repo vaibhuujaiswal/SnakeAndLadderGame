@@ -20,6 +20,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import static javafx.animation.Animation.INDEFINITE;
@@ -30,6 +31,8 @@ import static javafx.animation.Animation.INDEFINITE;
 //along with this think how to
 
 public class Controller extends Main {
+
+    public static ArrayList<Player> playerArray = new ArrayList<Player>();
 
     @FXML
     private AnchorPane greetAnchor; //greeting Page
@@ -48,6 +51,11 @@ public class Controller extends Main {
 
     @FXML
     void playGame(MouseEvent event) throws IOException {
+        playerArray.add(new Player(player1,1,false,1,38,12,-60));
+        playerArray.add(new Player(player2,2,false,1,38,-15,-60));
+
+        System.out.println(playerArray.get(0).getPlayerID());
+        System.out.println(playerArray.get(1).isPlayerEntrythrow());
         Parent root = FXMLLoader.load(getClass().getResource("snakesandladder.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle("Main board Game");
@@ -78,17 +86,21 @@ public class Controller extends Main {
     Random random = new Random();
     boolean playerbool = true;
     int playerID = 1;
+    boolean flag3000 = false;
 
     private TranslateTransition movement;
-    private boolean flag3000 = false;
-    boolean player1EntryThrow = false;
-    boolean player2EntryThrow = false;
-    int tileValuePlayer1 = 1;
-    int tileValuePlayer2 = 1;
 
 
 
-    TranslateTransition translationFunction(double time, Node object, double x, double y, double z, int count, boolean autoreturn){
+    TranslateTransition translationFunction(double time, Node object, double x, double y, double z, int count, boolean autoreturn, int playerID){
+
+        if (playerID == 1){
+            object = player1;
+        }else if(playerID == 2) {
+            object = player2;
+        }
+        System.out.println(object);
+
         TranslateTransition translate;
         translate = new TranslateTransition(Duration.millis(time),object);
         if (count == -1){
@@ -96,7 +108,6 @@ public class Controller extends Main {
         }else{
             translate.setCycleCount(count);
         }
-        //translate.setFromX(object.getTranslateX());
         translate.setByX(x);
         translate.setByY(y);
         translate.setByZ(z);
@@ -105,64 +116,35 @@ public class Controller extends Main {
         return translate;
     }
 
-    int x = 38;
     //problems with writing entry throw here, or maybe thats the solution of using it this way
     //adding +1 to the tile not everytime a dice is thrown, but everytime the random value is added to the main file
 
-    void playerInformation(Node player,int playerID, int rand,int currentX, int currentY, int currentZ,int tileValue) {
-            if (playerID == 1) {
-                if (tileValuePlayer1 % 10 == 0 && tileValuePlayer1>=10) { //in case the tile number is 10,20,30,40,50....60..90
-                    System.out.println("in 10");
-                    translationFunction(300, player, 0, -60, 0, 1, false).play();
-
-
-                } else {
-                    if ((tileValuePlayer1 % 10) - 1 == 0 && tileValuePlayer1 >= 10 ) { //in case of tile number is 11,21,31,41..91
-                        x = -x;
-                    }
-                    translationFunction(300, player, x, 0, 0, 1, false).play();
-                }
-                ++tileValuePlayer1;
-
-            } else {
-                if (tileValuePlayer2 % 10 == 0 && tileValuePlayer2 >= 10) { //in case the tile number is 10,20,30,40,50....60
-                    translationFunction(300, player, 0, -60, 0, 1, false).play();
-
-                } else {
-                    if ((tileValuePlayer2 - 1) % 10  == 0 && tileValuePlayer2 >= 10) { //in case of tile number is 11,12,13,14,
-                        x = -x;
-                    }
-                    translationFunction(300, player, x, 0, 0, 1, false).play();
-
-                }
-                ++tileValuePlayer2;
+    void playerInformation(int playerID) {
+        if (playerArray.get(playerID - 1).getPlayerTileNumber() % 10 == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case the tile number is 10,20,30,40,50....60..90
+            System.out.println("in 10 for player 1");
+            translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -60, 0, 1, false,playerID).play();
+        } else {
+            if ((playerArray.get(playerID - 1).getPlayerTileNumber()) - 1 == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
+                System.out.println("in 11 for player 1");
+                playerArray.get(playerID - 1).setxAxis(-(playerArray.get(playerID - 1).getxAxis()));
             }
+            System.out.println("In other values");
+            translationFunction(300, playerArray.get(playerID - 1).getPlayern(), playerArray.get(playerID - 1).getxAxis(), 0, 0, 1, false,playerID).play();
         }
-
-    //create a int that keeps a track of the positon of the dices in the gamei
+        playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + 1);
+    }
 
     @FXML
     void Roll_Dice(MouseEvent event) {
 
-        Node n;
-        boolean entryThrowRegister;
-        int tileValue;
-        //switching of player
         if (playerbool){
             playerID = 1;
-            n = player1;
-            entryThrowRegister = player1EntryThrow;
-            tileValue = tileValuePlayer1;
-
 
         }else{
             playerID = 2; //done
-            n = player2;
-            entryThrowRegister = player2EntryThrow;
-            tileValue = tileValuePlayer2;
         }
         if(!flag3000) {
-            movement = translationFunction(300, arrow, 0, -10, 0, -1, true);
+            movement = translationFunction(300, arrow, 0, -10, 0, -1, true,0);
             movement.play();
             flag3000 = true;
         }
@@ -175,20 +157,19 @@ public class Controller extends Main {
         playerbool = !playerbool;
         identificationArea.setImage(new Image(pageChange.toURI().toString()));
 
-        if (!entryThrowRegister) {
+        if (!playerArray.get(playerID-1).isPlayerEntrythrow()) {
             if (rand == 1) {
-                if (playerID == 1) {
-                    translationFunction(300, n, 12, -60, 0, 1, false).play();
-                    player1EntryThrow = true;
-                } else {
-                    translationFunction(300, n, -15, -60, 0, 1, false).play();
-                    player2EntryThrow = true;
-                }
+                    System.out.println("opened the values");
+                    int tempX = playerArray.get(playerID-1).getInitalXforPlayer();
+                    int tempY = playerArray.get(playerID-1).getInitalYforPlayer();
+                    System.out.println("Inital X value:" + tempX);
+                    System.out.println("Inital Y values" + tempY);
+                    translationFunction(300,playerArray.get(playerID-1).getPlayern(),tempX,tempY,0, 1, false,playerID).play();
+                    playerArray.get(playerID-1).setPlayerEntrythrow(true);
             }
-        }
-        else {
+        }else {
             for (int i = 0; i < rand; i++) {
-                playerInformation(n, playerID, rand, 0, 0, 0, tileValue);
+                playerInformation(playerID);
             }
         }
 
