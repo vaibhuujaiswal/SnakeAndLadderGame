@@ -126,7 +126,7 @@ public class Controller extends Main {
         TranslateTransition t;
         if (playerArray.get(playerID - 1).getPlayerTileNumber() % 10 == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case the tile number is 10,20,30,40,50....60..90
             System.out.println("in 10 for player 1");
-            t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -60, 0, 1, false,playerID);
+            t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -50, 0, 1, false,playerID);
 
         }else {
             if (((playerArray.get(playerID - 1).getPlayerTileNumber()) - 1 % 10) == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
@@ -140,48 +140,55 @@ public class Controller extends Main {
         playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + 1);
         return t;
     }
+    boolean diceFinishedFlag = true;
 
     @FXML
     void Roll_Dice(MouseEvent event) {
+        if (diceFinishedFlag) {
+            diceFinishedFlag = false;
+            if (playerbool) {
+                playerID = 1;
 
-        if (playerbool){
-            playerID = 1;
+            } else {
+                playerID = 2; //done
+            }
+            if (!flag3000) {
+                movement = translationFunction(300, arrow, 0, -10, 0, -1, true, 0);
+                movement.play();
+                flag3000 = true;
+            }
 
-        }else{
-            playerID = 2; //done
-        }
-        if(!flag3000) {
-            movement = translationFunction(300, arrow, 0, -10, 0, -1, true,0);
-            movement.play();
-            flag3000 = true;
-        }
+            //rolling dice
+            int rand = (int) (Math.random() * 6 + 1);
+            File file = new File("src/sample/dice/dice" + (rand) + ".png");
+            dice_image.setImage(new Image(file.toURI().toString()));
+            File pageChange = new File("src/sample/playerDull" + (playerID) + ".png");
+            playerbool = !playerbool;
+            identificationArea.setImage(new Image(pageChange.toURI().toString()));
 
-        //rolling dice
-        int rand = (int)(Math.random()*6+1);
-        File file = new File("src/sample/dice/dice" + (rand) + ".png");
-        dice_image.setImage(new Image(file.toURI().toString()));
-        File pageChange = new File("src/sample/playerDull" + (playerID) + ".png");
-        playerbool = !playerbool;
-        identificationArea.setImage(new Image(pageChange.toURI().toString()));
-
-        if (!playerArray.get(playerID-1).isPlayerEntrythrow()) {
-            if (rand == 1) {
+            if (!playerArray.get(playerID - 1).isPlayerEntrythrow()) {
+                if (rand == 1) {
                     System.out.println("opened the values");
-                    int tempX = playerArray.get(playerID-1).getInitalXforPlayer();
-                    int tempY = playerArray.get(playerID-1).getInitalYforPlayer();
+                    int tempX = playerArray.get(playerID - 1).getInitalXforPlayer();
+                    int tempY = playerArray.get(playerID - 1).getInitalYforPlayer();
                     System.out.println("Inital X value:" + tempX);
                     System.out.println("Inital Y values" + tempY);
-                    translationFunction(300,playerArray.get(playerID-1).getPlayern(),tempX,tempY,0, 1, false,playerID).play();
-                    playerArray.get(playerID-1).setPlayerEntrythrow(true);
+                    translationFunction(300, playerArray.get(playerID - 1).getPlayern(), tempX, tempY, 0, 1, false, playerID).play();
+                    playerArray.get(playerID - 1).setPlayerEntrythrow(true);
+                }
+                diceFinishedFlag = true;
+            } else {
+                Timeline t = new Timeline(new KeyFrame(Duration.millis(350), e -> {
+                    playerInformation(playerID).play();
+                }));
+                t.setCycleCount(rand);
+                t.play();
+
+                t.setOnFinished(e -> diceFinishedFlag = true);
             }
-        }else {
-            Timeline t = new Timeline(new KeyFrame(Duration.millis(350), e -> {
-                playerInformation(playerID).play();
-            }));
-            t.setCycleCount(rand);
-            t.play();
         }
     }
+
     @FXML
     void return_Home(MouseEvent event) throws Exception {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
