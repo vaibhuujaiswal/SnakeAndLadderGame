@@ -136,14 +136,17 @@ public class Controller extends Main {
         if (playerArray.get(playerID - 1).getPlayerTileNumber() % 10 == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case the tile number is 10,20,30,40,50....60..90
             System.out.println("in 10 for player 1");
             t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -45, 0, 1, false,playerID);
-
-        }else {
-            if (((playerArray.get(playerID - 1).getPlayerTileNumber() - 1) % 10) == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
-                System.out.println("in 11 for player 1");
-                int tempValue = playerArray.get(playerID - 1).getxAxis();
+            int tempValue = playerArray.get(playerID - 1).getxAxis();
                 tempValue = tempValue*-1;
                 playerArray.get(playerID - 1).setxAxis(tempValue);
-            }
+
+        }else {
+//            if (((playerArray.get(playerID - 1).getPlayerTileNumber() - 1) % 10) == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
+//                System.out.println("in 11 for player 1");
+//                int tempValue = playerArray.get(playerID - 1).getxAxis();
+//                tempValue = tempValue*-1;
+//                playerArray.get(playerID - 1).setxAxis(tempValue);
+//            }
             System.out.println("In other values");
             t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), playerArray.get(playerID - 1).getxAxis(), 0, 0, 1, false,playerID);
         }
@@ -171,7 +174,7 @@ public class Controller extends Main {
             }
 
             //rolling dice
-            int rand = (int) (Math.random() *1 + 1);
+            int rand = (int) (Math.random() * 1 + 1);
             File file = new File("src/sample/dice/dice" + (rand) + ".png");
             dice_image.setImage(new Image(file.toURI().toString()));
 
@@ -213,6 +216,7 @@ public class Controller extends Main {
                                 e.printStackTrace();
                             }
                         }
+                        int beforeSnakeOrLadder=playerArray.get(playerID-1).getPlayerTileNumber();
                         if (snakesHashMap.containsKey(playerArray.get(playerID - 1).getPlayerTileNumber())) {
                             int snakeX = -snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByX();
                             int snakeY = -snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByY();
@@ -235,16 +239,15 @@ public class Controller extends Main {
                             playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
                             System.out.println("Tile number current for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
                         }
+                        if(((beforeSnakeOrLadder+20)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber()+20)/10)%2){
+//                            System.out.println("I am here");
+                            playerArray.get(playerID-1).setxAxis(-playerArray.get(playerID-1).getxAxis());
+                        }
 
                         diceFinishedFlag = true;
                     }
                 };
                 thread.start();
-
-        
-
-
-
 
 //                timeLine.setOnFinished(e -> diceFinishedFlag = true);
             }
