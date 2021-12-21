@@ -71,6 +71,7 @@ public class Controller extends Main {
         ladderHashMap.put(2,new Ladder(104,479,65,380,21,2));
         ladderHashMap.put(6,new Ladder(253,479,293,384,27,6));
         ladderHashMap.put(8,new Ladder(333,479,332,329,33,8));
+//        ladderHashMap.put()
 
 //        ladderHashMap.put()
     }
@@ -147,12 +148,14 @@ public class Controller extends Main {
             t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), playerArray.get(playerID - 1).getxAxis(), 0, 0, 1, false,playerID);
         }
         playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + tileCount);
+        System.out.println("Tile in Player Information" + playerArray.get(playerID - 1).getPlayerTileNumber());
         return t;
     }
     boolean diceFinishedFlag = true;
 
     @FXML
     void Roll_Dice(MouseEvent event) {
+
         if (diceFinishedFlag) {
             diceFinishedFlag = false;
             if (playerbool) {
@@ -168,15 +171,14 @@ public class Controller extends Main {
             }
 
             //rolling dice
-            int rand = (int) (Math.random() * 2 + 1);
+            int rand = (int) (Math.random() *1 + 1);
             File file = new File("src/sample/dice/dice" + (rand) + ".png");
-
             dice_image.setImage(new Image(file.toURI().toString()));
-
 
             File pageChange = new File("src/sample/playerDull" + (playerID) + ".png");
             playerbool = !playerbool;
             identificationArea.setImage(new Image(pageChange.toURI().toString()));
+
 
             if (!playerArray.get(playerID - 1).isPlayerEntrythrow()) {
                 if (rand == 1) {
@@ -192,41 +194,62 @@ public class Controller extends Main {
 
             } else {
 //                TranslateTransition tempTranslate = playerInformation(playerID,1);
-                Timeline timeLine = new Timeline(new KeyFrame(Duration.millis(350), e -> {
-//                    tempTranslate.play();
-                    playerInformation(playerID,1).play();
-                }));
+//                Timeline timeLine = new Timeline(new KeyFrame(Duration.millis(350), e -> {
+//                    playerInformation(playerID,1).play();
+//                }));
+//
+//
+//
+//                timeLine.setCycleCount(rand);
+//                timeLine.play();
+                Thread thread= new Thread(){
+                    @Override
+                    public void run() {
+                        for(int i=0;i<rand;i++){
+                            playerInformation(playerID,1).play();
+                            try {
+                                Thread.sleep(350);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (snakesHashMap.containsKey(playerArray.get(playerID - 1).getPlayerTileNumber())) {
+                            int snakeX = -snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByX();
+                            int snakeY = -snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByY();
+                            System.out.println("Snakes X position" + snakeX);
+                            System.out.println("Snakes Y position" + snakeY);
+                            System.out.println("Tile number previously for snakes is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
+                            playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() - snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
+                            System.out.println("Tile number new for snake is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
+                            translationFunction(300, playerArray.get(playerID - 1).getPlayern(), snakeX, snakeY, 0, 1, false, playerID).play();
 
 
-                timeLine.setCycleCount(rand);
-                timeLine.play();
+                        } else if (ladderHashMap.containsKey(playerArray.get(playerID - 1).getPlayerTileNumber())) {
+                            int ladderX = ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByX();
+                            int ladderY = ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByY();
 
-                if (snakesHashMap.containsKey(playerArray.get(playerID - 1).getPlayerTileNumber())) {
-                    int snakeX = -snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByX();
-                    int snakeY = -snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByY();
-                    System.out.println("Snakes X position" + snakeX);
-                    System.out.println("Snakes Y position" + snakeY);
-                    System.out.println("Tile number previously for snakes is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
-                    playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() - snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
-                    System.out.println("Tile number new for snake is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
-                    translationFunction(300, playerArray.get(playerID - 1).getPlayern(), snakeX, snakeY, 0, 1, false, playerID).play();
+                            System.out.println("Ladder X position" + ladderX);
+                            System.out.println("Ladder Y position" + ladderY);
+                            System.out.println("Tile number previously for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
+                            translationFunction(300, playerArray.get(playerID - 1).getPlayern(), ladderX, ladderY, 0, 1, false, playerID).play();
+                            playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
+                            System.out.println("Tile number current for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
+                        }
+
+                        diceFinishedFlag = true;
+                    }
+                };
+                thread.start();
+
+        
 
 
-                } else if (ladderHashMap.containsKey(playerArray.get(playerID - 1).getPlayerTileNumber())) {
-                    int ladderX = ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByX();
-                    int ladderY = ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByY();
 
-                    System.out.println("Ladder X position" + ladderX);
-                    System.out.println("Ladder Y position" + ladderY);
-                    System.out.println("Tile number previously for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
-                    translationFunction(300, playerArray.get(playerID - 1).getPlayern(), ladderX, ladderY, 0, 1, false, playerID).play();
-                    playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide() + 2);
-                    System.out.println("Tile number current for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
-                }
-                timeLine.setOnFinished(e -> diceFinishedFlag = true);
 
+//                timeLine.setOnFinished(e -> diceFinishedFlag = true);
             }
         }
+
     }
 
     @FXML
