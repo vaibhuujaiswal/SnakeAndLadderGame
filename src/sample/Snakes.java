@@ -11,17 +11,25 @@ public class Snakes {
     private int byY;
     private int slide;
 
-    public Snakes(int snakeHeadX, int snakeHeadY, int snakeTailX, int snakeTailY, int headTileValue, int tailTileValue) {
-        this.snakeHeadX = snakeHeadX;
-        this.snakeHeadY = snakeHeadY;
-        this.snakeTailX = snakeTailX;
-        this.snakeTailY = snakeTailY;
+    public Snakes(int byX, int byY,int headTileValue, int tailTileValue) {
         this.headTileValue = headTileValue;
         this.tailTileValue = tailTileValue;
-        this.byX = (snakeHeadX - snakeTailX);
-        this.byY = (snakeHeadY - snakeTailY);
+        this.byX = byX;
+        this.byY = byY;
         this.slide = headTileValue - tailTileValue ;
     }
+
+//    public Snakes(int snakeHeadX, int snakeHeadY, int snakeTailX, int snakeTailY, int headTileValue, int tailTileValue) {
+//        this.snakeHeadX = snakeHeadX;
+//        this.snakeHeadY = snakeHeadY;
+//        this.snakeTailX = snakeTailX;
+//        this.snakeTailY = snakeTailY;
+//        this.headTileValue = headTileValue;
+//        this.tailTileValue = tailTileValue;
+//        this.byX = (snakeHeadX - snakeTailX);
+//        this.byY = (snakeHeadY - snakeTailY);
+//        this.slide = headTileValue - tailTileValue ;
+//    }
 
     public int getByX() {
         return byX;

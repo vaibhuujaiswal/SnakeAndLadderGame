@@ -63,32 +63,52 @@ public class Controller extends Main {
 
     void initalize(){
         playerArray.clear();
-        playerArray.add(new Player(player1,1,false,1,38,12,-60));
-        playerArray.add(new Player(player2,2,false,1,38,-15,-60));
-        snakesHashMap.put(23,new Snakes(142,374,217,484,23,5));
-        snakesHashMap.put(32,new Snakes(368,332,370,480,32,9));
-        snakesHashMap.put(51,new Snakes(406,238,407,428,51,11));
-        snakesHashMap.put(46,new Snakes(253,290,218,384,46,25));
-        snakesHashMap.put(59,new Snakes(104,238,65,338,59,40));
-        snakesHashMap.put(81,new Snakes(65,93,104,190,81,62));
-        snakesHashMap.put(66,new Snakes(254,192,218,237,66,56));
-        snakesHashMap.put(92,new Snakes(367,48,329,290,92,48));
-        snakesHashMap.put(95,new Snakes(253,48,294,238,95,54));
-        snakesHashMap.put(98,new Snakes(142,48,218,194,98,65));
+        playerArray.add(new Player(player1,1,false,1,38,14,-34));
+        playerArray.add(new Player(player2,2,false,1,38,-19,-35));
+//        snakesHashMap.put(23,new Snakes(134,375,210,471,23,5));
+//        snakesHashMap.put(32,new Snakes(362,327,362,471,32,9));
+//        snakesHashMap.put(51,new Snakes(400,231,400,423,51,11));
+//        snakesHashMap.put(46,new Snakes(248,279,210,375,46,25));
+//        snakesHashMap.put(59,new Snakes(96,231,58,327,59,40));
+//        snakesHashMap.put(81,new Snakes(58,87,96,183,81,62));
+//        snakesHashMap.put(66,new Snakes(248,183,210,231,66,56));
+//        snakesHashMap.put(92,new Snakes(362,39,324,279,92,48));
+//        snakesHashMap.put(95,new Snakes(248,39,286,231,95,54));
+//        snakesHashMap.put(98,new Snakes(134,39,210,183,98,65));
+        snakesHashMap.put(23,new Snakes(-76,-96,23,5));
+        snakesHashMap.put(32,new Snakes(0,-144,32,9));
+        snakesHashMap.put(51,new Snakes(0,-192,51,11));
+        snakesHashMap.put(46,new Snakes(38,-96,46,25));
+        snakesHashMap.put(59,new Snakes(38,-96,59,40));
+        snakesHashMap.put(81,new Snakes(-38,-96,81,62));
+        snakesHashMap.put(66,new Snakes(38,-48,66,56));
+        snakesHashMap.put(92,new Snakes(38,-240,92,48));
+        snakesHashMap.put(95,new Snakes(-38,-192,95,54));
+        snakesHashMap.put(98,new Snakes(-76,-144,98,65));
 
 
 
         //Hardcode Hashmap of ladder
-        ladderHashMap.put(2,new Ladder(104,479,65,380,21,2));       //1
-        ladderHashMap.put(6,new Ladder(253,479,293,384,27,6));      //2
-        ladderHashMap.put(8,new Ladder(333,479,332,329,33,8));      //3
-        ladderHashMap.put(16,new Ladder(217,429,293,330,34,16));    //4
-        ladderHashMap.put(24,new Ladder(177,383,177,190,64,24));    //5
-        ladderHashMap.put(38,new Ladder(143,337,142,242,58,38));    //6
-        ladderHashMap.put(63,new Ladder(141,189,105,90,82,63));     //7
-        ladderHashMap.put(85,new Ladder(218,95,180,43,97,85));      //8
-        ladderHashMap.put(73,new Ladder(332,142,293,43,94,73));     //9
-        ladderHashMap.put(70,new Ladder(408,190,407,47,91,70));     //10
+//        ladderHashMap.put(2,new Ladder(96,471,58,375,21,2));       //1
+//        ladderHashMap.put(6,new Ladder(248,471,286,375,27,6));      //2
+//        ladderHashMap.put(8,new Ladder(324,471,324,327,33,8));      //3
+//        ladderHashMap.put(16,new Ladder(210,423,286,327,34,16));    //4
+//        ladderHashMap.put(24,new Ladder(172,375,172,183,64,24));    //5
+//        ladderHashMap.put(38,new Ladder(134,327,134,231,58,38));    //6
+//        ladderHashMap.put(63,new Ladder(134,183,96,87,82,63));     //7
+//        ladderHashMap.put(85,new Ladder(210,87,172,39,97,85));      //8
+//        ladderHashMap.put(73,new Ladder(324,135,286,39,94,73));     //9
+//        ladderHashMap.put(70,new Ladder(400,183,400,39,91,70));     //10
+        ladderHashMap.put(2,new Ladder(-38,-96,21,2));       //1
+        ladderHashMap.put(6,new Ladder(38,-96,27,6));      //2
+        ladderHashMap.put(8,new Ladder(0,-144,33,8));      //3
+        ladderHashMap.put(16,new Ladder(76,-96,34,16));    //4
+        ladderHashMap.put(24,new Ladder(0,-192,64,24));    //5
+        ladderHashMap.put(38,new Ladder(0,-96,58,38));    //6
+        ladderHashMap.put(63,new Ladder(-38,-96,82,63));     //7
+        ladderHashMap.put(85,new Ladder(-38,-48,97,85));      //8
+        ladderHashMap.put(73,new Ladder(-38,-96,94,73));     //9
+        ladderHashMap.put(70,new Ladder(0,-144,91,70));     //10
 
 
 
@@ -265,11 +285,14 @@ public class Controller extends Main {
                             playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
                             System.out.println("Tile number current for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
                         }
-                        if(((beforeSnakeOrLadder)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber())/10)%2){
+//                        if(((beforeSnakeOrLadder)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber())/10)%2 || playerArray.get(playerID-1).getPlayerTileNumber() == 91){
+                        if(((beforeSnakeOrLadder -1)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber() -1)/10)%2|| playerArray.get(playerID-1).getPlayerTileNumber() == 91){
+
+                            System.out.println("I was Here");
                             playerArray.get(playerID-1).setxAxis(-playerArray.get(playerID-1).getxAxis());
-                            if (playerArray.get(playerID-1).getPlayerTileNumber() == 91){
-                                playerArray.get(playerID-1).setxAxis(playerArray.get(playerID-1).getxAxis());
-                            }
+//                            if (playerArray.get(playerID-1).getPlayerTileNumber() == 91){
+//                                playerArray.get(playerID-1).setxAxis(playerArray.get(playerID-1).getxAxis());
+//                            }
                         }
 
                         diceFinishedFlag = true;

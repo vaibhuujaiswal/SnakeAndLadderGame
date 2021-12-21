@@ -51,15 +51,22 @@ public class Ladder {
         return slide;
     }
 
-    public Ladder(int ladderBaseX, int ladderBaseY, int ladderTopX, int ladderTopY, int ladderTopTileValue, int ladderBaseTileValue) {
-        this.ladderBaseX = ladderBaseX;
-        this.ladderBaseY = ladderBaseY;
-        this.ladderTopX = ladderTopX;
-        this.ladderTopY = ladderTopY;
+//    public Ladder(int ladderBaseX, int ladderBaseY, int ladderTopX, int ladderTopY, int ladderTopTileValue, int ladderBaseTileValue) {
+//        this.ladderBaseX = ladderBaseX;
+//        this.ladderBaseY = ladderBaseY;
+//        this.ladderTopX = ladderTopX;
+//        this.ladderTopY = ladderTopY;
+//        this.ladderTopTileValue = ladderTopTileValue;
+//        this.ladderBaseTileValue = ladderBaseTileValue;
+//        this.byX = (ladderTopX - ladderBaseX);
+//        this.byY = (ladderTopY - ladderBaseY);
+//        this.slide = ladderTopTileValue - ladderBaseTileValue;
+//    }
+    public Ladder(int byX, int byY,int ladderTopTileValue, int ladderBaseTileValue) {
         this.ladderTopTileValue = ladderTopTileValue;
         this.ladderBaseTileValue = ladderBaseTileValue;
-        this.byX = (ladderTopX - ladderBaseX);
-        this.byY = (ladderTopY - ladderBaseY);
+        this.byX = byX;
+        this.byY = byY;
         this.slide = ladderTopTileValue - ladderBaseTileValue;
     }
 
