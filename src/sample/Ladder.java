@@ -58,8 +58,8 @@ public class Ladder {
         this.ladderTopY = ladderTopY;
         this.ladderTopTileValue = ladderTopTileValue;
         this.ladderBaseTileValue = ladderBaseTileValue;
-        this.byX = (ladderBaseX - ladderBaseY);
-        this.byY = (ladderBaseX - ladderBaseY);
+        this.byX = (ladderTopX - ladderBaseX);
+        this.byY = (ladderTopY - ladderBaseY);
         this.slide = ladderTopTileValue - ladderBaseTileValue;
     }
 

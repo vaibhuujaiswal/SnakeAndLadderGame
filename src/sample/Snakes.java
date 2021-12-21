@@ -20,7 +20,7 @@ public class Snakes {
         this.tailTileValue = tailTileValue;
         this.byX = (snakeHeadX - snakeTailX);
         this.byY = (snakeHeadY - snakeTailY);
-        this.slide = headTileValue - tailTileValue;
+        this.slide = headTileValue - tailTileValue ;
     }
 
     public int getByX() {
