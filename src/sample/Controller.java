@@ -53,8 +53,6 @@ public class Controller extends Main {
     @FXML
     void playGame(MouseEvent event) throws IOException {
         initalize();
-        System.out.println(playerArray.get(0).getPlayerID());
-        System.out.println(playerArray.get(1).isPlayerEntrythrow());
         Parent root = FXMLLoader.load(getClass().getResource("snakesandladder.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle("Main board Game");
@@ -68,9 +66,33 @@ public class Controller extends Main {
         playerArray.add(new Player(player1,1,false,1,38,12,-60));
         playerArray.add(new Player(player2,2,false,1,38,-15,-60));
         snakesHashMap.put(23,new Snakes(142,374,217,484,23,5));
-        ladderHashMap.put(2,new Ladder(104,479,65,380,21,2));
-        ladderHashMap.put(6,new Ladder(253,479,293,384,27,6));
-        ladderHashMap.put(8,new Ladder(333,479,332,329,33,8));
+        snakesHashMap.put(32,new Snakes(368,332,370,480,32,9));
+        snakesHashMap.put(51,new Snakes(406,238,407,428,51,11));
+        snakesHashMap.put(46,new Snakes(253,290,218,384,46,25));
+        snakesHashMap.put(59,new Snakes(104,238,65,338,59,40));
+        snakesHashMap.put(81,new Snakes(65,93,104,190,81,62));
+        snakesHashMap.put(66,new Snakes(254,192,218,237,66,56));
+        snakesHashMap.put(92,new Snakes(367,48,329,290,92,48));
+        snakesHashMap.put(95,new Snakes(253,48,294,238,95,54));
+        snakesHashMap.put(98,new Snakes(142,48,218,194,98,65));
+
+
+
+        //Hardcode Hashmap of ladder
+        ladderHashMap.put(2,new Ladder(104,479,65,380,21,2));       //1
+        ladderHashMap.put(6,new Ladder(253,479,293,384,27,6));      //2
+        ladderHashMap.put(8,new Ladder(333,479,332,329,33,8));      //3
+        ladderHashMap.put(16,new Ladder(217,429,293,330,34,16));    //4
+        ladderHashMap.put(24,new Ladder(177,383,177,190,64,24));    //5
+        ladderHashMap.put(38,new Ladder(143,337,142,242,58,38));    //6
+        ladderHashMap.put(63,new Ladder(141,189,105,90,82,63));     //7
+        ladderHashMap.put(85,new Ladder(218,95,180,43,97,85));      //8
+        ladderHashMap.put(73,new Ladder(332,142,293,43,94,73));     //9
+        ladderHashMap.put(70,new Ladder(408,190,407,47,91,70));     //10
+
+
+
+
 //        ladderHashMap.put()
 
 //        ladderHashMap.put()
@@ -102,7 +124,6 @@ public class Controller extends Main {
     private TranslateTransition movement;
 
 
-
     TranslateTransition translationFunction(double time, Node object, double x, double y, double z, int count, boolean autoreturn, int playerID){
 
         if (playerID == 1){
@@ -112,7 +133,6 @@ public class Controller extends Main {
         }else{
             System.out.println("Error in player ID in Translation function");
         }
-        //System.out.println("For player ID" + playerID + "Image view of" + object);
         TranslateTransition translate;
         translate = new TranslateTransition(Duration.millis(time),object);
         if (count == -1){
@@ -128,8 +148,6 @@ public class Controller extends Main {
         return translate;
     }
 
-    //problems with writing entry throw here, or maybe thats the solution of using it this way
-    //adding +1 to the tile not everytime a dice is thrown, but everytime the random value is added to the main file
 
     TranslateTransition playerInformation(int playerID,int tileCount) {
         TranslateTransition t;
@@ -137,8 +155,8 @@ public class Controller extends Main {
             System.out.println("in 10 for player 1");
             t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -45, 0, 1, false,playerID);
             int tempValue = playerArray.get(playerID - 1).getxAxis();
-                tempValue = tempValue*-1;
-                playerArray.get(playerID - 1).setxAxis(tempValue);
+            tempValue = tempValue*-1;
+            playerArray.get(playerID - 1).setxAxis(tempValue);
 
         }else {
 //            if (((playerArray.get(playerID - 1).getPlayerTileNumber() - 1) % 10) == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case of tile number is 11,21,31,41..91
@@ -156,6 +174,13 @@ public class Controller extends Main {
     }
     boolean diceFinishedFlag = true;
 
+    int dice(){
+        int rand = (int) (Math.random() * 3 + 1);
+        File file = new File("src/sample/dice/dice" + (rand) + ".png");
+        dice_image.setImage(new Image(file.toURI().toString()));
+        return rand;
+    }
+
     @FXML
     void Roll_Dice(MouseEvent event) {
 
@@ -172,15 +197,16 @@ public class Controller extends Main {
                 movement.play();
                 flag3000 = true;
             }
+            if (playerArray.get(playerID - 1).getPlayerTileNumber() == 100){
+                System.out.println("Game over");
+            }
 
-            //rolling dice
-            int rand = (int) (Math.random() * 1 + 1);
-            File file = new File("src/sample/dice/dice" + (rand) + ".png");
-            dice_image.setImage(new Image(file.toURI().toString()));
+            int rand;
+            rand = dice(); //random number generated and dice image found!
 
             File pageChange = new File("src/sample/playerDull" + (playerID) + ".png");
-            playerbool = !playerbool;
             identificationArea.setImage(new Image(pageChange.toURI().toString()));
+            playerbool = !playerbool;
 
 
             if (!playerArray.get(playerID - 1).isPlayerEntrythrow()) {
@@ -211,7 +237,7 @@ public class Controller extends Main {
                         for(int i=0;i<rand;i++){
                             playerInformation(playerID,1).play();
                             try {
-                                Thread.sleep(350);
+                                Thread.sleep(325);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -239,9 +265,11 @@ public class Controller extends Main {
                             playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
                             System.out.println("Tile number current for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
                         }
-                        if(((beforeSnakeOrLadder+20)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber()+20)/10)%2){
-//                            System.out.println("I am here");
+                        if(((beforeSnakeOrLadder)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber())/10)%2){
                             playerArray.get(playerID-1).setxAxis(-playerArray.get(playerID-1).getxAxis());
+                            if (playerArray.get(playerID-1).getPlayerTileNumber() == 91){
+                                playerArray.get(playerID-1).setxAxis(playerArray.get(playerID-1).getxAxis());
+                            }
                         }
 
                         diceFinishedFlag = true;
