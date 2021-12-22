@@ -106,20 +106,24 @@
             </ImageView>
          </children>
       </Group>
-      <ImageView fx:id="quitIdentity" fitHeight="327.0" fitWidth="499.0" layoutX="5.0" layoutY="96.0" translateX="-500.0">
-         <image>
-            <Image url="@reconfirm.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="okayButton" fitHeight="83.0" fitWidth="206.0" layoutX="211.0" layoutY="292.0" onMouseClicked="#Roll_Dice" translateX="-500.0">
-         <image>
-            <Image url="@okayButton.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="returnCancel" fitHeight="86.0" fitWidth="107.0" layoutX="90.0" layoutY="292.0" onMouseClicked="#popUpReturn" translateX="-500.0">
-         <image>
-            <Image url="@backButton.png" />
-         </image>
-      </ImageView>
+      <Group fx:id="quitIdentity" layoutX="-471.0" layoutY="170.0">
+         <children>
+            <ImageView fitHeight="327.0" fitWidth="499.0" layoutX="-29.0" layoutY="-12.0">
+               <image>
+                  <Image url="@reconfirm.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="okayButton" fitHeight="83.0" fitWidth="206.0" layoutX="178.0" layoutY="183.0" onMouseClicked="#return_Home">
+               <image>
+                  <Image url="@okayButton.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="returnCancel" fitHeight="86.0" fitWidth="107.0" layoutX="48.0" layoutY="183.0" onMouseClicked="#popUpReturn">
+               <image>
+                  <Image url="@backButton.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
    </children>
 </AnchorPane>

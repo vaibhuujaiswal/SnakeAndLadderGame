@@ -236,23 +236,16 @@ public class Controller extends Main {
 
 
     @FXML
-    private ImageView quitIdentity;
+    private Group quitIdentity;
 
     @FXML
     private ImageView returnCancel;
 
     void popUpPlay(){
         TranslateTransition quitIdentity1 = new TranslateTransition(Duration.millis(200), quitIdentity);
-        TranslateTransition returnCancel1  = new TranslateTransition(Duration.millis(200),returnCancel);
-        TranslateTransition okayButton1 = new TranslateTransition(Duration.millis(200),okayButton);
-
-        okayButton1.setByX(500);
-        returnCancel1.setByX(500);
         quitIdentity1.setByX(500);
+        quitIdentity1.play();
 
-        quitIdentity1.play();
-        returnCancel1.play();
-        quitIdentity1.play();
     }
 
     @FXML
@@ -262,7 +255,6 @@ public class Controller extends Main {
 
     @FXML
     void popUpReturn(MouseEvent event) {
-//        okayButton.setVisible(true);
         TranslateTransition quitIdentity2 = new TranslateTransition(Duration.millis(200), quitIdentity);
         TranslateTransition returnCancel2  = new TranslateTransition(Duration.millis(200),returnCancel);
         TranslateTransition okayButton2 = new TranslateTransition(Duration.millis(200),okayButton);
@@ -521,6 +513,7 @@ public class Controller extends Main {
 
     @FXML
     void return_Home(MouseEvent event) throws Exception {
+        System.out.println("we were here");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         start(stage);
     }
