@@ -68,8 +68,8 @@ public class Controller extends Main {
     void initalize(){
         playerArray.clear();
 //        winnerCelebration.setVisible(true);
-        playerArray.add(new Player(player1,1,false,1,38,14,-34));
-        playerArray.add(new Player(player2,2,false,1,38,-19,-35));
+        playerArray.add(new Player(player1,1,false,1,39,14,-34));
+        playerArray.add(new Player(player2,2,false,1,39,-19,-35));
 //        snakesHashMap.put(23,new Snakes(134,375,210,471,23,5));
 //        snakesHashMap.put(32,new Snakes(362,327,362,471,32,9));
 //        snakesHashMap.put(51,new Snakes(400,231,400,423,51,11));
@@ -194,7 +194,7 @@ public class Controller extends Main {
         TranslateTransition t;
         if (playerArray.get(playerID - 1).getPlayerTileNumber() % 10 == 0 && playerArray.get(playerID - 1).getPlayerTileNumber() >= 10) { //in case the tile number is 10,20,30,40,50....60..90
             System.out.println("in 10 for player 1");
-            t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -40, 0, 1, false,playerID);
+            t = translationFunction(300, playerArray.get(playerID - 1).getPlayern(), 0, -49, 0, 1, false,playerID);
             int tempValue = playerArray.get(playerID - 1).getxAxis();
             tempValue = tempValue*-1;
             playerArray.get(playerID - 1).setxAxis(tempValue);
@@ -333,8 +333,11 @@ public class Controller extends Main {
                         @Override
                         public void run() {
                             for(int i=0;i<rand;i++){
+                                if (playerArray.get(playerID - 1).getPlayerTileNumber() >= 95 && (playerArray.get(playerID - 1).getPlayerTileNumber() + rand > 100)){
+                                    continue;
+                                }
                                 playerInformation(playerID,1).play();
-                                if (playerArray.get(playerID - 1).getPlayerTileNumber() >= 100 ){
+                                if (playerArray.get(playerID - 1).getPlayerTileNumber() == 100 ){
                                     if (flagPopUp) {
                                         System.out.println("Game over");
                                         File winnerFile = new File("src/sample/winnerPlayer" + (playerID) + ".png");
