@@ -302,8 +302,9 @@ public class Controller extends Main {
                 rand = (int) (Math.random() * 6 + 1);
                 File file = new File("src/sample/dice/dice" + (rand) + ".png");
                 dice_image.setImage(new Image(file.toURI().toString()));
-                File pageChange = new File("src/sample/playerDull" + (playerID) + ".png");
+                File pageChange = new File("src/sample/playerDull" + (3 - playerID) + ".png");
                 identificationArea.setImage(new Image(pageChange.toURI().toString()));
+                arrow.setVisible(false);
                 playerbool = !playerbool;
 
 
