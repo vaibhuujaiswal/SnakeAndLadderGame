@@ -1,12 +1,12 @@
 package sample;
 
 public class Ladder {
-    private int ladderBaseX;
-    private int ladderBaseY;
-    private int ladderTopX;
-    private int ladderTopY;
-    private int ladderValueSetByX;
-    private int ladderValueSetByY;
+//    private int ladderBaseX;
+//    private int ladderBaseY;
+//    private int ladderTopX;
+//    private int ladderTopY;
+//    private int ladderValueSetByX;
+//    private int ladderValueSetByY;
     private int ladderTopTileValue;
     private int ladderBaseTileValue;
     private int byX;
@@ -22,22 +22,22 @@ public class Ladder {
     }
 
 
-
-    public int getLadderBaseX() {
-        return ladderBaseX;
-    }
-
-    public int getLadderBaseY() {
-        return ladderBaseY;
-    }
-
-    public int getLadderTopX() {
-        return ladderTopX;
-    }
-
-    public int getLadderTopY() {
-        return ladderTopY;
-    }
+//
+//    public int getLadderBaseX() {
+//        return ladderBaseX;
+//    }
+//
+//    public int getLadderBaseY() {
+//        return ladderBaseY;
+//    }
+//
+//    public int getLadderTopX() {
+//        return ladderTopX;
+//    }
+//
+//    public int getLadderTopY() {
+//        return ladderTopY;
+//    }
 
     public int getLadderTopTileValue() {
         return ladderTopTileValue;

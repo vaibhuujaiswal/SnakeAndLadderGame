@@ -70,9 +70,10 @@
             <Image url="@dice/dice6.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="returnLogo" layoutX="-2.0" layoutY="-3.0" onMouseClicked="#return_Home">
+      <ImageView fx:id="diceGIF" fitHeight="75.0" fitWidth="81.0" layoutX="207.0" layoutY="532.0" />
+      <ImageView fx:id="returnLogo" fitHeight="38.0" fitWidth="49.0" layoutX="6.0" layoutY="16.0" onMouseClicked="#popUp">
          <image>
-            <Image url="@returnbutton.png" />
+            <Image url="@backButton.png" />
          </image>
       </ImageView>
       <ImageView fx:id="restartGame" fitHeight="52.0" fitWidth="117.0" layoutX="14.0" layoutY="607.0" onMouseClicked="#playGame">
@@ -85,7 +86,7 @@
             <Image url="@yellowarrow.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="48.0" fitWidth="38.0" layoutX="58.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="48.0" fitWidth="38.0" layoutX="325.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
       <Group layoutX="22.0" layoutY="123.0">
          <children>
             <ImageView fx:id="winnerCelebration" fitHeight="398.0" fitWidth="455.0" layoutX="-5.0" translateX="-500.0">
@@ -105,5 +106,20 @@
             </ImageView>
          </children>
       </Group>
+      <ImageView fx:id="quitIdentity" fitHeight="327.0" fitWidth="499.0" layoutX="5.0" layoutY="96.0" translateX="-500.0">
+         <image>
+            <Image url="@reconfirm.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="okayButton" fitHeight="83.0" fitWidth="206.0" layoutX="211.0" layoutY="292.0" onMouseClicked="#Roll_Dice" translateX="-500.0">
+         <image>
+            <Image url="@okayButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="returnCancel" fitHeight="86.0" fitWidth="107.0" layoutX="90.0" layoutY="292.0" onMouseClicked="#popUpReturn" translateX="-500.0">
+         <image>
+            <Image url="@backButton.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

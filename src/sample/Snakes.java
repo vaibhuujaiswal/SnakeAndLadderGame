@@ -1,10 +1,10 @@
 package sample;
 
 public class Snakes {
-    private int snakeHeadX;
-    private int snakeHeadY;
-    private int snakeTailX;
-    private int snakeTailY;
+//    private int snakeHeadX;
+//    private int snakeHeadY;
+//    private int snakeTailX;
+//    private int snakeTailY;
     private int headTileValue;
     private int tailTileValue;
     private int byX;
@@ -43,21 +43,21 @@ public class Snakes {
         return slide;
     }
 
-    public int getSnakeHeadX() {
-        return snakeHeadX;
-    }
-
-    public int getSnakeHeadY() {
-        return snakeHeadY;
-    }
-
-    public int getSnakeTailX() {
-        return snakeTailX;
-    }
-
-    public int getSnakeTailY() {
-        return snakeTailY;
-    }
+//    public int getSnakeHeadX() {
+//        return snakeHeadX;
+//    }
+//
+//    public int getSnakeHeadY() {
+//        return snakeHeadY;
+//    }
+//
+//    public int getSnakeTailX() {
+//        return snakeTailX;
+//    }
+//
+//    public int getSnakeTailY() {
+//        return snakeTailY;
+//    }
 
     public int getHeadTileValue() {
         return headTileValue;
