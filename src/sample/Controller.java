@@ -241,11 +241,14 @@ public class Controller extends Main {
     @FXML
     private ImageView returnCancel;
 
+    boolean flagt = true;
     void popUpPlay(){
-        TranslateTransition quitIdentity1 = new TranslateTransition(Duration.millis(200), quitIdentity);
-        quitIdentity1.setByX(500);
-        quitIdentity1.play();
-
+        if (flagt) {
+            TranslateTransition quitIdentity1 = new TranslateTransition(Duration.millis(200), quitIdentity);
+            quitIdentity1.setByX(500);
+            quitIdentity1.play();
+            flagt = false;
+        }
     }
 
     @FXML
@@ -255,15 +258,9 @@ public class Controller extends Main {
 
     @FXML
     void popUpReturn(MouseEvent event) {
+        flagt = true;
         TranslateTransition quitIdentity2 = new TranslateTransition(Duration.millis(200), quitIdentity);
-        TranslateTransition returnCancel2  = new TranslateTransition(Duration.millis(200),returnCancel);
-        TranslateTransition okayButton2 = new TranslateTransition(Duration.millis(200),okayButton);
-
-        okayButton2.setByX(-500);
-        returnCancel2.setByX(-500);
         quitIdentity2.setByX(-500);
-        quitIdentity2.play();
-        returnCancel2.play();
         quitIdentity2.play();
     }
 
@@ -312,15 +309,7 @@ public class Controller extends Main {
                     diceFinishedFlag = true;
 
                 } else {
-//                TranslateTransition tempTranslate = playerInformation(playerID,1);
-//                Timeline timeLine = new Timeline(new KeyFrame(Duration.millis(350), e -> {
-//                    playerInformation(playerID,1).play();
-//                }));
-//
-//
-//
-//                timeLine.setCycleCount(rand);
-//                timeLine.play();
+
                     Thread thread= new Thread(){
                         @Override
                         public void run() {
@@ -399,114 +388,10 @@ public class Controller extends Main {
                         }
                     };
                     thread.start();
-
-//                timeLine.setOnFinished(e -> diceFinishedFlag = true);
                 }
 
             });
             thread1.start();
-
-            //dice(); //random number generated and dice image found!
-
-//            File pageChange = new File("src/sample/playerDull" + (playerID) + ".png");
-//            identificationArea.setImage(new Image(pageChange.toURI().toString()));
-//            playerbool = !playerbool;
-//
-//
-//            if (!playerArray.get(playerID - 1).isPlayerEntrythrow()) {
-//                if (rand == 1) {
-//                    System.out.println("opened the values");
-//                    int tempX = playerArray.get(playerID - 1).getInitalXforPlayer();
-//                    int tempY = playerArray.get(playerID - 1).getInitalYforPlayer();
-//                    System.out.println("Inital X value:" + tempX);
-//                    System.out.println("Inital Y values" + tempY);
-//                    translationFunction(300, playerArray.get(playerID - 1).getPlayern(), tempX, tempY, 0, 1, false, playerID).play();
-//                    playerArray.get(playerID - 1).setPlayerEntrythrow(true);
-//                }
-//                diceFinishedFlag = true;
-//
-//            } else {
-////                TranslateTransition tempTranslate = playerInformation(playerID,1);
-////                Timeline timeLine = new Timeline(new KeyFrame(Duration.millis(350), e -> {
-////                    playerInformation(playerID,1).play();
-////                }));
-////
-////
-////
-////                timeLine.setCycleCount(rand);
-////                timeLine.play();
-//                Thread thread= new Thread(){
-//                    @Override
-//                    public void run() {
-//                        for(int i=0;i<rand;i++){
-//                            playerInformation(playerID,1).play();
-//                            if (playerArray.get(playerID - 1).getPlayerTileNumber() >= 100 ){
-//                                if (flagPopUp) {
-//                                    System.out.println("Game over");
-//                                    File winnerFile = new File("src/sample/winnerPlayer" + (playerID) + ".png");
-//                                    System.out.println(winnerCelebration);
-//                                    winnerCelebration.setImage(new Image(winnerFile.toURI().toString()));
-//
-//                                    TranslateTransition winnerTranslation = new TranslateTransition(Duration.millis(200), winnerCelebration);
-//                                    TranslateTransition menuTranslation  = new TranslateTransition(Duration.millis(200),menuButton);
-//                                    TranslateTransition returnTranslation = new TranslateTransition(Duration.millis(200),restartGame1);
-//
-//                                    menuTranslation.setByX(500);
-//                                    returnTranslation.setByX(500);
-//                                    winnerTranslation.setByX(500);
-//                                    winnerTranslation.play();
-//                                    menuTranslation.play();
-//                                    returnTranslation.play();
-//
-//                                    flagPopUp = false;
-//                                    dice_image.setDisable(true);
-//                                    restartGame.setDisable(true);
-//                                    arrow.setVisible(false);
-//                                    returnLogo.setDisable(true);
-//                                }
-//                            }
-//                            try {
-//                                Thread.sleep(325);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                        int beforeSnakeOrLadder=playerArray.get(playerID-1).getPlayerTileNumber();
-//                        if (snakesHashMap.containsKey(playerArray.get(playerID - 1).getPlayerTileNumber())) {
-//                            int snakeX = -snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByX();
-//                            int snakeY = -snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByY();
-//                            System.out.println("Snakes X position" + snakeX);
-//                            System.out.println("Snakes Y position" + snakeY);
-//                            System.out.println("Tile number previously for snakes is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
-//                            playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() - snakesHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
-//                            System.out.println("Tile number new for snake is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
-//                            translationFunction(300, playerArray.get(playerID - 1).getPlayern(), snakeX, snakeY, 0, 1, false, playerID).play();
-//
-//
-//                        } else if (ladderHashMap.containsKey(playerArray.get(playerID - 1).getPlayerTileNumber())) {
-//                            int ladderX = ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByX();
-//                            int ladderY = ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getByY();
-//
-//                            System.out.println("Ladder X position" + ladderX);
-//                            System.out.println("Ladder Y position" + ladderY);
-//                            System.out.println("Tile number previously for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
-//                            translationFunction(300, playerArray.get(playerID - 1).getPlayern(), ladderX, ladderY, 0, 1, false, playerID).play();
-//                            playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
-//                            System.out.println("Tile number current for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
-//                        }
-//
-//
-//                        if(((beforeSnakeOrLadder -1)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber() -1)/10)%2 || playerArray.get(playerID-1).getPlayerTileNumber() == 91){
-//                            playerArray.get(playerID-1).setxAxis(-playerArray.get(playerID-1).getxAxis());
-//                        }
-//
-//                        diceFinishedFlag = true;
-//                    }
-//                };
-//                thread.start();
-//
-////                timeLine.setOnFinished(e -> diceFinishedFlag = true);
-//            }
         }
 
     }
