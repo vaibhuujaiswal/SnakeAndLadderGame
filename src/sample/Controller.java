@@ -63,6 +63,7 @@ public class Controller extends Main {
 
     void initalize(){
         playerArray.clear();
+//        winnerCelebration.setVisible(true);
         playerArray.add(new Player(player1,1,false,1,38,14,-34));
         playerArray.add(new Player(player2,2,false,1,38,-19,-35));
 //        snakesHashMap.put(23,new Snakes(134,375,210,471,23,5));
@@ -131,10 +132,23 @@ public class Controller extends Main {
     private ImageView player2;
 
     @FXML
+    private ImageView menuButton;
+
+    @FXML
+    private ImageView restartGame1;
+
+    @FXML
+    private ImageView restartGame;
+
+    @FXML
     private ImageView exitbutton; //red cross mark in main page
 
     @FXML
     private ImageView arrow; //yellow arrow
+
+    @FXML
+    private ImageView winnerCelebration;
+
 
     Random random = new Random();
     boolean playerbool = true;
@@ -195,15 +209,16 @@ public class Controller extends Main {
     boolean diceFinishedFlag = true;
 
     int dice(){
-        int rand = (int) (Math.random() * 3 + 1);
+        int rand = (int) (Math.random() * 6 + 1);
         File file = new File("src/sample/dice/dice" + (rand) + ".png");
         dice_image.setImage(new Image(file.toURI().toString()));
         return rand;
     }
 
+    boolean flagPopUp = true;
+
     @FXML
     void Roll_Dice(MouseEvent event) {
-
         if (diceFinishedFlag) {
             diceFinishedFlag = false;
             if (playerbool) {
@@ -217,9 +232,32 @@ public class Controller extends Main {
                 movement.play();
                 flag3000 = true;
             }
-            if (playerArray.get(playerID - 1).getPlayerTileNumber() == 100){
-                System.out.println("Game over");
-            }
+
+//            if (playerArray.get(playerID - 1).getPlayerTileNumber() >= 100 ){
+//                if (flagPopUp) {
+//                    System.out.println("Game over");
+//                    File winnerFile = new File("src/sample/winnerPlayer" + (playerID) + ".png");
+//                    System.out.println(winnerCelebration);
+//                    winnerCelebration.setImage(new Image(winnerFile.toURI().toString()));
+//
+//                    TranslateTransition winnerTranslation = new TranslateTransition(Duration.millis(200), winnerCelebration);
+//                    TranslateTransition menuTranslation  = new TranslateTransition(Duration.millis(200),menuButton);
+//                    TranslateTransition returnTranslation = new TranslateTransition(Duration.millis(200),restartGame1);
+//
+//                    menuTranslation.setByX(500);
+//                    returnTranslation.setByX(500);
+//                    winnerTranslation.setByX(500);
+//                    winnerTranslation.play();
+//                    menuTranslation.play();
+//                    returnTranslation.play();
+//
+//                    flagPopUp = false;
+//                    dice_image.setDisable(true);
+//                    restartGame.setDisable(true);
+//                    arrow.setVisible(false);
+//                    returnLogo.setDisable(true);
+//                }
+//            }
 
             int rand;
             rand = dice(); //random number generated and dice image found!
@@ -256,6 +294,31 @@ public class Controller extends Main {
                     public void run() {
                         for(int i=0;i<rand;i++){
                             playerInformation(playerID,1).play();
+                            if (playerArray.get(playerID - 1).getPlayerTileNumber() >= 100 ){
+                                if (flagPopUp) {
+                                    System.out.println("Game over");
+                                    File winnerFile = new File("src/sample/winnerPlayer" + (playerID) + ".png");
+                                    System.out.println(winnerCelebration);
+                                    winnerCelebration.setImage(new Image(winnerFile.toURI().toString()));
+
+                                    TranslateTransition winnerTranslation = new TranslateTransition(Duration.millis(200), winnerCelebration);
+                                    TranslateTransition menuTranslation  = new TranslateTransition(Duration.millis(200),menuButton);
+                                    TranslateTransition returnTranslation = new TranslateTransition(Duration.millis(200),restartGame1);
+
+                                    menuTranslation.setByX(500);
+                                    returnTranslation.setByX(500);
+                                    winnerTranslation.setByX(500);
+                                    winnerTranslation.play();
+                                    menuTranslation.play();
+                                    returnTranslation.play();
+
+                                    flagPopUp = false;
+                                    dice_image.setDisable(true);
+                                    restartGame.setDisable(true);
+                                    arrow.setVisible(false);
+                                    returnLogo.setDisable(true);
+                                }
+                            }
                             try {
                                 Thread.sleep(325);
                             } catch (InterruptedException e) {
@@ -285,14 +348,10 @@ public class Controller extends Main {
                             playerArray.get(playerID - 1).setPlayerTileNumber(playerArray.get(playerID - 1).getPlayerTileNumber() + ladderHashMap.get(playerArray.get(playerID - 1).getPlayerTileNumber()).getSlide());
                             System.out.println("Tile number current for ladder is : " + playerArray.get(playerID - 1).getPlayerTileNumber());
                         }
-//                        if(((beforeSnakeOrLadder)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber())/10)%2 || playerArray.get(playerID-1).getPlayerTileNumber() == 91){
-                        if(((beforeSnakeOrLadder -1)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber() -1)/10)%2|| playerArray.get(playerID-1).getPlayerTileNumber() == 91){
 
-                            System.out.println("I was Here");
+
+                        if(((beforeSnakeOrLadder -1)/10)%2!=((playerArray.get(playerID-1).getPlayerTileNumber() -1)/10)%2 || playerArray.get(playerID-1).getPlayerTileNumber() == 91){
                             playerArray.get(playerID-1).setxAxis(-playerArray.get(playerID-1).getxAxis());
-//                            if (playerArray.get(playerID-1).getPlayerTileNumber() == 91){
-//                                playerArray.get(playerID-1).setxAxis(playerArray.get(playerID-1).getxAxis());
-//                            }
                         }
 
                         diceFinishedFlag = true;

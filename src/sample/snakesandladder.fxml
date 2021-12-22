@@ -75,7 +75,7 @@
             <Image url="@returnbutton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="restartGame" fitHeight="41.0" fitWidth="89.0" layoutX="16.0" layoutY="618.0" onMouseClicked="#playGame">
+      <ImageView fx:id="restartGame" fitHeight="52.0" fitWidth="117.0" layoutX="14.0" layoutY="607.0" onMouseClicked="#playGame">
          <image>
             <Image url="@restart.png" />
          </image>
@@ -86,5 +86,24 @@
          </image>
       </ImageView>
       <ImageView fitHeight="48.0" fitWidth="38.0" layoutX="58.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true" />
+      <Group layoutX="22.0" layoutY="123.0">
+         <children>
+            <ImageView fx:id="winnerCelebration" fitHeight="398.0" fitWidth="455.0" layoutX="-5.0" translateX="-500.0">
+               <image>
+                  <Image url="@winnerPlayer1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="restartGame1" fitHeight="76.0" fitWidth="182.0" layoutX="221.0" layoutY="292.0" onMouseClicked="#playGame" translateX="-500.0">
+               <image>
+                  <Image url="@restart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="menuButton" fitHeight="80.0" fitWidth="169.0" layoutX="50.0" layoutY="290.0" onMouseClicked="#return_Home" preserveRatio="true" translateX="-500.0">
+               <image>
+                  <Image url="@menuButton.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
    </children>
 </AnchorPane>
