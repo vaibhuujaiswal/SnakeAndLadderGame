@@ -340,7 +340,7 @@ public class Controller extends Main {
 //                                jumpingToken.setByY(-50);
 //                                jumpingToken.setAutoReverse(true);
 //                                jumpingToken.play();
-//                                playerInformation(playerID,1).play();
+                                playerInformation(playerID,1).play();
 
                                 
                                 if (playerArray.get(playerID - 1).getPlayerTileNumber() == 100 ){
