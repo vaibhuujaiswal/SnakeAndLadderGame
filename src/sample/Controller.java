@@ -304,7 +304,6 @@ public class Controller extends Main {
                 dice_image.setImage(new Image(file.toURI().toString()));
                 File pageChange = new File("src/sample/playerDull" + (3 - playerID) + ".png");
                 identificationArea.setImage(new Image(pageChange.toURI().toString()));
-                arrow.setVisible(false);
                 playerbool = !playerbool;
 
 
