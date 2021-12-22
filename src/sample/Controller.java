@@ -336,7 +336,13 @@ public class Controller extends Main {
                                 if (playerArray.get(playerID - 1).getPlayerTileNumber() >= 95 && (playerArray.get(playerID - 1).getPlayerTileNumber() + rand > 100)){
                                     continue;
                                 }
-                                playerInformation(playerID,1).play();
+//                                TranslateTransition jumpingToken = new TranslateTransition(Duration.millis(150),playerArray.get(playerID - 1).getPlayern());
+//                                jumpingToken.setByY(-50);
+//                                jumpingToken.setAutoReverse(true);
+//                                jumpingToken.play();
+//                                playerInformation(playerID,1).play();
+
+                                
                                 if (playerArray.get(playerID - 1).getPlayerTileNumber() == 100 ){
                                     if (flagPopUp) {
                                         System.out.println("Game over");
